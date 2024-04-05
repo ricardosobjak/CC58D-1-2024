@@ -25,3 +25,6 @@ Content-Type: application/json
     "nome": "Marcelo Alberton",
     "email": "ma@gmail.com"
 }
+
+### DELETE
+DELETE {{URL}}/1
