@@ -2,17 +2,18 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../model/User');
+const isAuthorized = require('../middleware/isAuthorized');
 
 
 // ROTAS
 
 /* GET users listing. */
-router.get("/", async function(req, res) {
+router.get("/", [isAuthorized], async function(req, res) {
   return  res.json(await User.find());
 });
 
 // Obter um usuário pelo ID
-router.get("/:id", async (req, res) => {
+router.get("/:id", isAuthorized, async (req, res) => {
   const {id} = req.params;
 
   const result = await User.findById(id);
@@ -34,6 +35,14 @@ router.post("/", async (req, res) => {
     : res.status(201).json(await user.save());
 });
 
+
+router.put("/:id", isAuthorized, (req,res)=>{
+
+});
+
+router.delete("/:id", isAuthorized, (req,res)=>{
+
+});
 
 
 

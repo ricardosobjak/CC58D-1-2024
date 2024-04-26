@@ -7,6 +7,7 @@ const mongoose = require('mongoose'); // import
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const isAuthorized = require('./middleware/isAuthorized');
 
 require("dotenv").config();
 
@@ -35,8 +36,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Definição dos rotas da aplicação
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/auth', require('./routes/auth'));
+//app.use('/produtos', isAuthorized, require('./routes/produtos'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
